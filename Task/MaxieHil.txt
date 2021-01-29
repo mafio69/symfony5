@@ -1,0 +1,8 @@
+1) Utwórz nowy projekt za pomocą Composer - dowolny framework oraz biblioteki.
+2) Przygotuj REST API z dwoma endpointami:
+a. Listowanie artykułów od najnowszego
+- 10 artykułów na stronę
+- Paginacja artykułów
+b. Dodawanie artykułów
+- Artykuł składa się z: nazwy (wymagane) i opisu (minimum 150 znaków)
+- Endpoint powinien być zabezpieczony i dostępny tylko dla zautentykowanych żądań (zastosuj dowolny mechanizm autentykacji)

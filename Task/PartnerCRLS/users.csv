@@ -1,0 +1,6 @@
+uuid,forename,surname,roles,email
+"41f9de03-f0cb-451a-8e33-a87545b38528","Jan","Kowalski","ROLE_INTERNAL_APPRAISER,ROLE_MANAGER","jan.kowalski@firma.pl"
+"ea7ed9e2-3b6b-401d-b8bb-c003675adb3f","Anna","Nowak","ROLE_EXTERNAL_APPRAISER","ania@firma.pl"
+"16d5ffda-8965-4abf-bbfe-724b1aadbd63","Krzysztof","Świderski","ROLE_MANAGER","krzysiek@firma.pl"
+"66b5e2a5-bd6d-4644-a30c-b34dcb1fa4c0","Katarzyna","Nowaczyk","ROLE_INTERNAL_APPRAISER,ROLE_MANAGER",""
+"b74c0a1e-0a74-41e4-9504-2b265d699bae","Łukasz","Gawliński","ROLE_ADMIN,ROLE_USER,ROLE_INTERNAL_APPRAISER","kordian@firma.pl"

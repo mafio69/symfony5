@@ -1,0 +1,116 @@
+{
+"id": 100,
+"assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"author": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"realEstates": [
+  {
+    "type": "building",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  }
+],
+"inspectionDate": "2020-01-01"
+}
+
+{
+"id": 200,
+"assignee": "66b5e2a5-bd6d-4644-a30c-b34dcb1fa4c0",
+"author": "ea7ed9e2-3b6b-401d-b8bb-c003675adb3f",
+"realEstates": [
+  {
+    "type": "building",
+	"description": "Nam blandit efficitur mi vitae porta. Maecenas tristique arcu eget mi ullamcorper tempus tempus eu sapien."
+  }
+],
+"inspectionDate": "2020-02-01"
+}
+
+{
+"id": 300,
+"assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"author": "16d5ffda-8965-4abf-bbfe-724b1aadbd63",
+"realEstates": [
+  {
+    "type": "building",
+	"description": "Nunc commodo nisi non erat lobortis eleifend in nec lacus. Cras blandit nisi quis feugiat congue. Vestibulum tincidunt erat dui, laoreet pharetra ligula iaculis sit amet. Curabitur condimentum, metus vel viverra tempor, odio ligula aliquet nisi, a fermentum dui massa sit amet diam. Nullam auctor sodales turpis a congue. Sed fermentum efficitur pharetra. Nulla facilisi. Mauris ut ex lectus. Aenean placerat, neque a lobortis scelerisque, nulla arcu sagittis neque, in suscipit ex eros ultricies lacus. Phasellus a dignissim est."
+  }
+],
+"inspectionDate": "2021-03-03"
+}
+
+{
+"id": 400,
+"assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"author": "66b5e2a5-bd6d-4644-a30c-b34dcb1fa4c0",
+"realEstates": [
+  {
+    "type": "apartment",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  }
+],
+"inspectionDate": "2020-01-01"
+}
+
+{
+"id": 500,
+"assignee": "b74c0a1e-0a74-41e4-9504-2b265d699bae",
+"author": "b74c0a1e-0a74-41e4-9504-2b265d699bae",
+"realEstates": [
+  {
+    "type": "land",
+	"description": "Nam blandit efficitur mi vitae porta. Maecenas tristique arcu eget mi ullamcorper tempus tempus eu sapien."
+  }
+],
+"inspectionDate": "2019-02-28"
+}
+
+{
+"id": 600,
+"assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"author": "b74c0a1e-0a74-41e4-9504-2b265d699bae",
+"realEstates": [
+  {
+    "type": "building",
+	"description": "Sed sed commodo neque."
+  }
+],
+"inspectionDate": ""
+}
+
+{
+"id": 700,
+"assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"author": "41f9de03-f0cb-451a-8e33-a87545b38528",
+"realEstates": [
+  {
+    "type": "land",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  }
+],
+"inspectionDate": "2020-06-31"
+}
+
+{
+"id": 800,
+"assignee": "ea7ed9e2-3b6b-401d-b8bb-c003675adb3f",
+"author": "ea7ed9e2-3b6b-401d-b8bb-c003675adb3f",
+"realEstates": [
+  {
+    "type": "buildings",
+	"description": ""
+  }
+],
+"inspectionDate": "2020-06-03 10:09:25"
+}
+
+{
+"id": 900,
+"assignee": "b74c0a1e-0a74-41e4-9504-2b265d699bae",
+"author": "b74c0a1e-0a75-41e4-9504-2b265d700bae",
+"realEstates": [
+  {
+    "type": "building",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  }
+],
+"inspectionDate": "2020-01-01"
+}

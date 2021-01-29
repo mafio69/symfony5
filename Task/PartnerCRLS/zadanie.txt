@@ -1,0 +1,42 @@
+Zadanie rekrutacyjne:
+
+Należy stworzyć aplikację WWW, która służy do zarządzania zleceniami. Komunikacja z aplikacją ma odbywać się za pomocą API.
+W systemie znajdują się konta użytkowników z przypisanymi rolami w firmie. Dane użytkowników znajdują się w pliku 'users.csv'.
+
+Wymagania:
+
+1. Aplikacja ma pozwalać na utworzenie nowego zlecenia inspekcji na podstawie otrzymanych danych w formacie JSON:
+{
+"id": int, // ID zlecenia
+"assignee": string // UUID osoby odpowiedzialnej
+"author": string // UUID autora
+"realEstates": [
+  {
+    "type": string, // typ nieruchomości
+	"description": string // opis nieruchomości
+  },
+  ...
+], // lista nieruchomości
+"inspectionDate": string // data inspekcji YYYY-MM-DD
+}
+
+Przykładowe dane zleceń, które mogą się pojawić na wejściu znajdują się w załączonym pliku 'tasks.txt'.
+Zlecenie musi zawierać datę i czas utworzenia. Nowe zlecenia nie mogą nadpisywać zleceń już istniejących w systemie.
+
+2. Aplikacja ma pozwalać na zmianę typu konkretnej nieruchomości dla konkretnego zlecenia. Typ może przyjmować wartość wyłącznie z listy:
+'building','apartment','land'. Zmianę typu można dokonać wyłącznie, gdy zlecenie jest w statusie 'inspection'.
+
+3. Aplikacja ma pozwalać na uruchomienie komendy z poziomu systemu operacyjnego, która spowoduje zmianę statusu danego zlecenia zgodnie z procesem:
+
+new_task  --(inspect)-->  inspection  --(send_notification)-->  notified_task  --(close)-->  closed_task
+
+Dla przejścia 'send_notification' aplikacja ma wysłać wiadomość email do autora zlecenia o treści:
+'Zlecenie o numerze <ID> przeszło inspekcję.', gdzie jako <ID> to id zlecenia.
+Wiadomość ma zostać wysłana wyłącznie, gdy autor jest rzeczoznawcą wewnętrznym. W innym przypadku ma zostać wygenerowany log z informacją, że wiadomość
+nie mogła zostać dostarczona do adresata.
+Każde zlecenie po zakończeniu całego procesu musi zawierać datę zamknięcia.
+
+Aplikacja powinna wykorzystywać framework Symfony 4/5, mieć czytelną strukturę i być napisana możliwie rozwojowo. Przedstawione rozwiązanie powinno opierać się
+na testach. W kodzie proszę zastosować znane techniki "dobrych praktyk" oraz, jeśli jest taka potrzeba, wykorzystać wzorce projektowe.
+Odpowiedź proszę udostępnić w formie linku do repozytorium git (np. GitHub). Historię zmian proszę wykonać tak, aby odzwierciedlała etapy budowy aplikacji.
+Jeżeli w trakcie wykonywania zadania pojawią się pytania, wątpliwości lub będzie potrzebne więcej czasu, prosimy o kontakt.
