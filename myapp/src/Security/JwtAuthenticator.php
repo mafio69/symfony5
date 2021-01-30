@@ -6,10 +6,12 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Firebase\JWT\JWT;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Log\Logger;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,13 +22,19 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
     private $params;
+    /**
+     * @var Logger
+     */
+    private $logger;
 
-    public function __construct(EntityManagerInterface $em, ContainerBagInterface $params)
+    public function __construct(EntityManagerInterface $em, ContainerBagInterface $params, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->params = $params;
+        $this->logger = $logger;
     }
 
+    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function start(Request $request, AuthenticationException $authException = null)
     {
         $data = [
@@ -35,6 +43,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
+    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function supports(Request $request)
     {
         return $request->headers->has('Authorization');
@@ -47,6 +56,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
+       $this->logger->info(print_r($credentials));
         try {
             $credentials = str_replace('Bearer ', '', $credentials);
             $jwt = (array) JWT::decode(
@@ -63,11 +73,13 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         }
     }
 
+    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function checkCredentials($credentials, UserInterface $user)
     {
         return true;
     }
 
+    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         return new JsonResponse([
@@ -75,12 +87,15 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         ], Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @noinspection PhpUnnecessaryReturnInspection */
+    /** @noinspection PhpUnnecessaryReturnInspection
+     * @noinspection UselessReturnInspection
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         return;
     }
 
+    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function supportsRememberMe()
     {
         return false;

@@ -16,13 +16,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AuthController extends AbstractController
 {
     /**
-     * @Route("/auth", name="auth")
+     * @Route("/api/auth", name="auth", methods="post")
      */
     public function index(): Response
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/AuthController.php',
         ]);
     }
 
@@ -49,7 +48,7 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/auth/login", name="login", methods={"POST"})
+     * @Route("/api/login", name="login", methods="post")
      * @param Request $request
      * @param UserRepository $userRepository
      * @param UserPasswordEncoderInterface $encoder
