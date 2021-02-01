@@ -1,4 +1,4 @@
-{
+[{
 "id": 100,
 "assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
 "author": "41f9de03-f0cb-451a-8e33-a87545b38528",
@@ -10,7 +10,7 @@
 ],
 "inspectionDate": "2020-01-01"
 }
-
+,
 {
 "id": 200,
 "assignee": "66b5e2a5-bd6d-4644-a30c-b34dcb1fa4c0",
@@ -23,7 +23,7 @@
 ],
 "inspectionDate": "2020-02-01"
 }
-
+,
 {
 "id": 300,
 "assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
@@ -36,7 +36,7 @@
 ],
 "inspectionDate": "2021-03-03"
 }
-
+,
 {
 "id": 400,
 "assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
@@ -49,7 +49,7 @@
 ],
 "inspectionDate": "2020-01-01"
 }
-
+,
 {
 "id": 500,
 "assignee": "b74c0a1e-0a74-41e4-9504-2b265d699bae",
@@ -62,7 +62,7 @@
 ],
 "inspectionDate": "2019-02-28"
 }
-
+,
 {
 "id": 600,
 "assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
@@ -75,7 +75,7 @@
 ],
 "inspectionDate": ""
 }
-
+,
 {
 "id": 700,
 "assignee": "41f9de03-f0cb-451a-8e33-a87545b38528",
@@ -88,7 +88,7 @@
 ],
 "inspectionDate": "2020-06-31"
 }
-
+,
 {
 "id": 800,
 "assignee": "ea7ed9e2-3b6b-401d-b8bb-c003675adb3f",
@@ -101,7 +101,7 @@
 ],
 "inspectionDate": "2020-06-03 10:09:25"
 }
-
+,
 {
 "id": 900,
 "assignee": "b74c0a1e-0a74-41e4-9504-2b265d699bae",
@@ -114,3 +114,4 @@
 ],
 "inspectionDate": "2020-01-01"
 }
+]

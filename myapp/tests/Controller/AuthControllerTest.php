@@ -4,6 +4,9 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @method assertEquals(int $int, int $getStatusCode)
+ */
 class AuthControllerTest extends WebTestCase {
 
     public function testLoginWithoutCredentials(): void

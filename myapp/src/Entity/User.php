@@ -4,8 +4,9 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 
 /**
@@ -14,28 +15,14 @@ use Symfony\Component\Uid\Uuid;
 class User implements UserInterface
 {
     /**
+     * @var UuidInterface
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
-    private $uuid;
-
-    public function getUuid()
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid($uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
-    }
+    private  $uuid;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -47,17 +34,6 @@ class User implements UserInterface
      */
     private $first_name;
 
-    public function getFirstName(): ?string
-    {
-        return $this->first_name;
-    }
-
-    public function setFirstName(?string $first_name): self
-    {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
 
     /**
      * @ORM\Column(type="string", length=180, unique=false, nullable=true)
@@ -81,6 +57,30 @@ class User implements UserInterface
      */
     private $apiToken;
 
+    public function getUuid(): UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid($uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setFirstName(?string $first_name): self
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
     public function getApiToken(): ?string
     {
         return $this->apiToken;
@@ -91,11 +91,6 @@ class User implements UserInterface
         $this->apiToken = $apiToken;
 
         return $this;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getEmail(): ?string
@@ -175,7 +170,7 @@ class User implements UserInterface
 
     public function toArray(): array
     {
-        return ['id' => $this->getId(),
+        return ['uuid' => $this->getUuid(),
             'apiToken' => $this->getApiToken(),
             'lastName' => $this->getUsername(),
             'email' => $this->getEmail(),
