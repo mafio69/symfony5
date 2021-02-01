@@ -6,6 +6,8 @@ use App\ConstantsDirectory\PaginationConstants;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -26,13 +28,22 @@ class ArticleService
      * @var ValidatorInterface
      */
     public $validator;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
-    public function __construct(ArticleRepository $articlesRepository, SerializerInterface $serializer, PaginatorInterface $paginator, ValidatorInterface $validator)
+    public function __construct(ArticleRepository $articlesRepository, 
+                                SerializerInterface $serializer, 
+                                PaginatorInterface $paginator, 
+                                ValidatorInterface $validator, 
+                                LoggerInterface $logger)
     {
         $this->articlesRepository = $articlesRepository;
         $this->serializer = $serializer;
         $this->paginator = $paginator;
         $this->validator = $validator;
+        $this->logger = $logger;
     }
 
     /**
@@ -66,10 +77,29 @@ class ArticleService
             if (count($errors) > 0) {
                 $errorsString = $errors->get(0)->getMessage();
                 $errorsString .= $errors->has(1) ? $errors->get(1)->getMessage() : '' ;
+                $message = 'ERROR: ' . $errorsString;
+                $this->logger->error($message);
 
-                return 'ERROR: ' . $errorsString;
+                return $message;
             }
 
         return 'OK';
+    }
+
+    public function prepareArticle(Request $request): string
+    {
+        $content = json_decode($request->getContent(), true);
+        $article = new Article();
+        $article->setName($content['name']);
+        $article->setDescription($content['description']);
+        $validResult = $this->validateArticle($article);
+
+        if ($validResult !== 'OK') {
+            return  $validResult;
+        }
+
+        $this->articlesRepository->saveArticle($article);
+
+        return 'Success, article added.';
     }
 }

@@ -42,7 +42,6 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function supports(Request $request): bool
     {
         return $request->headers->has('Authorization');
@@ -72,13 +71,11 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         }
     }
 
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         return true;
     }
 
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): JsonResponse
     {
         return new JsonResponse([
@@ -86,8 +83,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         ], Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @noinspection PhpUnnecessaryReturnInspection
-     * @noinspection UselessReturnInspection
+    /**
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
@@ -99,7 +95,6 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return null;
     }
 
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     public function supportsRememberMe(): bool
     {
         return false;

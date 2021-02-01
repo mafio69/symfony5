@@ -33,6 +33,29 @@ class ArticleRepository extends ServiceEntityRepository
         $this->manager->persist($article);
         $this->manager->flush();
     }
+
+    public function getAll()
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_OBJECT);
+    }
+
+    /**
+     * @param string|null $name
+     *
+     * @return int|mixed|string
+     */
+    public function getAllAsArray(string $name = null)
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        if ($name) {
+            $qb->where('s.name = :name')->setParameter('name', $name);
+        }
+
+        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY);
+    }
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */
@@ -61,43 +84,4 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function getAll()
-    {
-        $qb = $this->createQueryBuilder('s');
-
-        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_OBJECT);
-    }
-
-    /**
-     * @param string|null $name
-     *
-     * @return int|mixed|string
-     */
-    public function getAllAsArray(string $name = null)
-    {
-        $qb = $this->createQueryBuilder('s');
-
-        if ($name) {
-            $qb->where('s.name = :name')->setParameter('name', $name);
-        }
-
-        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY);
-    }
-
-    /**
-     * @param string|null $name
-     *
-     * @return int
-     */
-    public function getPaginatedCount(?string $name = null): int
-    {
-        $qb = $this->createQueryBuilder('s')->select('COUNT(s)');
-
-        if ($name) {
-            $qb->where('s.name = :name')->setParameter('name', $name);
-        }
-
-        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
-    }
-
 }

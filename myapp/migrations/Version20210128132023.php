@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection SenselessMethodDuplicationInspection */
 
 declare(strict_types=1);
 

@@ -2,13 +2,11 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Article;
 use App\Services\ArticleService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MaxiController extends AbstractController
@@ -31,20 +29,9 @@ class MaxiController extends AbstractController
      */
     public function addArticle(Request $request): JsonResponse
     {
-        $article =  $this->articleService->serializer->deserialize($request->getContent(),Article::class,'json');
-        $content = json_decode($request->getContent(), true);
-        $article = new Article();
-        $article->setName($content['name']);
-        $article->setDescription($content['description']);
-        $validResult = $this->articleService->validateArticle($article);
+        $result =  $this->articleService->prepareArticle($request);
 
-        if ($validResult !== 'OK') {
-            return new JsonResponse(['status' =>  $validResult], Response::HTTP_CREATED);
-        }
-
-        $this->articleService->articlesRepository->saveArticle($article);
-
-        return new JsonResponse(['status' => $validResult], Response::HTTP_CREATED);
+        return new JsonResponse(['status' => $result], Response::HTTP_CREATED);
     }
 
     /**
