@@ -24,10 +24,12 @@ class ArticleService
      * @var PaginatorInterface
      */
     private $paginator;
+
     /**
      * @var ValidatorInterface
      */
     public $validator;
+
     /**
      * @var LoggerInterface
      */

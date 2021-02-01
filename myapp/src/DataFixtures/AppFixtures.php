@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 use Faker\Factory;
 use Faker\Generator;
+use Symfony\Component\Uid\Uuid;
 
 
 class AppFixtures extends Fixture
@@ -41,6 +42,7 @@ class AppFixtures extends Fixture
         $user->setFirstName('TEST');
         $user->setLastName("TESTOWY");
         $user->setEmail('exa@op.pl');
+        $user->setUuid(Uuid::v4());
         $user->setRoles(['ROLE_INTERNAL_APPRAISER','ROLE_MANAGER','ROLE_ADMIN','ROLE_USER']);
         $user->setPassword(password_hash('1234', PASSWORD_BCRYPT));
         $manager->persist($user);
@@ -53,8 +55,10 @@ class AppFixtures extends Fixture
                 $user->setFirstName($this->faker->firstName);
                 $user->setLastName($this->faker->lastName);
                 $user->setEmail($this->faker->email);
+                $user->setUuid(Uuid::v4());
                 $user->setRoles($role);
                 $user->setPassword(password_hash('1234', PASSWORD_BCRYPT));
+
                 $manager->persist($user);
             } catch (Exception $e) {
                 echo "Seed fail: " . $e->getMessage();

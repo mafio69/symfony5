@@ -32,7 +32,8 @@
     "symfony/validator": "^5.",
     "symfony/webpack-encore-bundle": "^1.9",
     "symfony/yaml": "5.2.*",
-    "symfony/phpunit-bridge": "*"
+    "symfony/phpunit-bridge": "*",
+    "league/csv": "*"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.4",

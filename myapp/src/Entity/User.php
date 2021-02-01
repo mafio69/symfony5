@@ -1,10 +1,11 @@
-<?php /** @noinspection ReturnTypeCanBeDeclaredInspection */
+<?php
 
 namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Uid\Uuid;
 
 
 /**
@@ -20,6 +21,23 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="uuid", unique=true)
+     */
+    private $uuid;
+
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid($uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -29,20 +47,16 @@ class User implements UserInterface
      */
     private $first_name;
 
-    /**
-     * @return mixed
-     */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->first_name;
     }
 
-    /**
-     * @param mixed $first_name
-     */
-    public function setFirstName($first_name): void
+    public function setFirstName(?string $first_name): self
     {
         $this->first_name = $first_name;
+
+        return $this;
     }
 
     /**
@@ -67,20 +81,16 @@ class User implements UserInterface
      */
     private $apiToken;
 
-    /**
-     * @return mixed
-     */
-    public function getApiToken()
+    public function getApiToken(): ?string
     {
         return $this->apiToken;
     }
 
-    /**
-     * @param mixed $apiToken
-     */
-    public function setApiToken($apiToken): void
+    public function setApiToken(?string $apiToken): self
     {
         $this->apiToken = $apiToken;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -99,20 +109,17 @@ class User implements UserInterface
 
         return $this;
     }
-    /**
-     * @return mixed
-     */
-    public function getLastName()
+
+    public function getLastName(): ?string
     {
         return $this->last_name;
     }
 
-    /**
-     * @param mixed $last_name
-     */
-    public function setLastName($last_name): void
+    public function setLastName(?string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
     }
 
     /**
@@ -125,16 +132,9 @@ class User implements UserInterface
         return (string)$this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function getRoles(): ?array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -144,10 +144,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -170,7 +167,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
