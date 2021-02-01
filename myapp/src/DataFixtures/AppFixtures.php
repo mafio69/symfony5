@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpPrivateFieldCanBeLocalVariableInspection */
 
 namespace App\DataFixtures;
 
@@ -37,6 +37,13 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
         $roles = ['ROLE_INTERNAL_APPRAISER','ROLE_MANAGER','ROLE_ADMIN','ROLE_USER'];
+        $user = new User();
+        $user->setFirstName('TEST');
+        $user->setLastName("TESTOWY");
+        $user->setEmail('exa@op.pl');
+        $user->setRoles(['ROLE_INTERNAL_APPRAISER','ROLE_MANAGER','ROLE_ADMIN','ROLE_USER']);
+        $user->setPassword(password_hash('1234', PASSWORD_BCRYPT));
+        $manager->persist($user);
         for ($i = 0; $i < 50; $i++) {
             try {
                 $rand1 = random_int(0,3);

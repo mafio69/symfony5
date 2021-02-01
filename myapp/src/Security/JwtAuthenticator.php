@@ -34,8 +34,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         $this->logger = $logger;
     }
 
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
-    public function start(Request $request, AuthenticationException $authException = null)
+    public function start(Request $request, AuthenticationException $authException = null): JsonResponse
     {
         $data = [
             'message' => 'Authentication Required'
@@ -44,19 +43,19 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
     }
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return $request->headers->has('Authorization');
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): ?string
     {
         return $request->headers->get('Authorization');
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-       $this->logger->info(print_r($credentials));
+       $this->logger->info($credentials);
         try {
             $credentials = str_replace('Bearer ', '', $credentials);
             $jwt = (array) JWT::decode(
@@ -74,13 +73,13 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
     }
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return true;
     }
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): JsonResponse
     {
         return new JsonResponse([
             'message' => $exception->getMessage()
@@ -89,14 +88,19 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
     /** @noinspection PhpUnnecessaryReturnInspection
      * @noinspection UselessReturnInspection
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param string $providerKey
+     * @return Response|null
+     * @return Response|null
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): ?Response
     {
-        return;
+        return null;
     }
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
-    public function supportsRememberMe()
+    public function supportsRememberMe(): bool
     {
         return false;
     }

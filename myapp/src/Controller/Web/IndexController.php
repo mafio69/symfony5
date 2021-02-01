@@ -16,7 +16,7 @@ class IndexController extends AbstractController
 
         return $this->render(
             'index.twig',
-            ['h1' => 'hello word']
+            ['h1' => print_r(getenv())]
         );
     }
 }

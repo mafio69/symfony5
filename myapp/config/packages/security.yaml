@@ -3,27 +3,24 @@ security:
         App\Entity\User:
             algorithm: bcrypt
     providers:
-        jwt:
-            lexik_jwt: ~
-
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
     firewalls:
         login:
             pattern: ^/api/login
             stateless: true
             anonymous: true
-            json_login:
-                check_path: /api/login_check
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-
         api:
             pattern: ^/api
             stateless: true
+            security: true
             guard:
                 authenticators:
                     - App\Security\JwtAuthenticator
-                provider: jwt
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api,       roles:  IS_AUTHENTICATED_FULLY}

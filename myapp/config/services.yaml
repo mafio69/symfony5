@@ -29,3 +29,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    get_set_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        tags: [serializer.normalizer]
+
+    Symfony\Component\Serializer\Normalizer\PropertyNormalizer:
+        arguments:
+            $nameConverter: '@serializer.name_converter.camel_case_to_snake_case'
+            $propertyTypeExtractor: '@property_info.php_doc_extractor'
+        tags: [ serializer.normalizer ]

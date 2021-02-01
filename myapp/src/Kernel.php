@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection PhpIncludeInspection */
+
+/** @noinspection PhpIncludeInspection */
 
 namespace App;
 

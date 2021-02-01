@@ -67,7 +67,7 @@ class AuthController extends AbstractController
         }
         $payload = [
             "user" => $user->getUsername(),
-            "exp"  => (new DateTime())->modify("+5 minutes")->getTimestamp(),
+            "exp"  => (new DateTime())->modify("+30 minutes")->getTimestamp(),
         ];
 
 
@@ -75,6 +75,7 @@ class AuthController extends AbstractController
         return $this->json([
             'message' => 'success!',
             'token' => sprintf('Bearer %s', $jwt),
+            'exp' =>date('H-m-s', $payload["exp"])
         ]);
     }
 }
